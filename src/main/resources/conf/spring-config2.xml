@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/task" xmlns:P="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                             http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+                             http://www.springframework.org/schema/context
+                             http://www.springframework.org/schema/context/spring-context-4.1.xsd
+                             http://www.springframework.org/schema/mvc
+                             http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+
+    <!--使Spring支持自动检测组件，使springmvc认为包下使用了@controller注解的类是控制器 -->
+    <!--<context:component-scan base-package="com.meituan"/>-->
+    <mvc:annotation-driven/>
+    <!--factorybean设置-->
+    <bean id="car" class="com.meituan.spring.life.factorybean.CarFactoryBean">
+        <property name="carInfo" value=" 法拉利,400,2000000"/>
+    </bean>
+</beans>

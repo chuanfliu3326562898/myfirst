@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-4.1.xsd
+                           http://www.springframework.org/schema/mvc
+                           http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <context:component-scan base-package="com.meituan"/>
+    <!--引入配置文件-->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+        <property name="location" value="classpath:conf/jdbc.properties"/>
+        <property name="properties" ref="configProperties" />
+    </bean>
+    <bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>classpath:*/*.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--MySQL链接-->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"  destroy-method="close">
+        <property name="driverClassName" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+    </bean>
+    <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:/conf/mybatis-config.xml"/>
+        <!-- 自动扫描mapping.xml文件 -->
+        <property name="mapperLocations" value="classpath:/mapper/*.xml"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.meituan.mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+    </bean>
+
+    <!--开启事务管理-->
+    <tx:annotation-driven/>
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="add*" propagation="REQUIRED" />
+            <tx:method name="insert*" propagation="REQUIRED" />
+            <tx:method name="save*" propagation="REQUIRED" />
+            <tx:method name="update*" propagation="REQUIRED" />
+            <tx:method name="modify*" propagation="REQUIRED" />
+            <tx:method name="delete*" propagation="REQUIRED" />
+            <tx:method name="get*" propagation="SUPPORTS" />
+            <tx:method name="find*" propagation="SUPPORTS" />
+            <tx:method name="*" propagation="SUPPORTS" />
+        </tx:attributes>
+    </tx:advice>
+    <aop:config>
+        <aop:pointcut id="transactionPointcut"
+                      expression="execution(* com.meituan.service..*(..))" />
+        <aop:advisor pointcut-ref="transactionPointcut"
+                     advice-ref="transactionAdvice" />
+    </aop:config>
+
+    <!--强制不启动cglib动态代理，expose-proxy开启暴露Aop代理到ThreadLocal支持-->
+    <aop:aspectj-autoproxy expose-proxy="true" proxy-target-class="false"/>
+
+    <!--面向切面的编程1-->
+    <!--<aop:config>-->
+        <!--<aop:aspect id="springLogAspect" ref="springLogAspect">-->
+            <!--<aop:pointcut id="springLogPoint" expression="(execution(public * com.meituan..*(..)))-->
+                    <!--and (@annotation(com.meituan.aspect.SpringLogAround))" />-->
+            <!--<aop:around pointcut-ref="springLogPoint" method="doAround"/>-->
+        <!--</aop:aspect>-->
+    <!--</aop:config>-->
+    <!--面向切面的编程3-->
+    <aop:config>
+        <aop:aspect ref="logAspect">
+            <aop:pointcut id="logPoint" expression="(execution(public * com.meituan..*(..)))" />
+            <aop:around pointcut-ref="logPoint" method="doAround"/>
+        </aop:aspect>
+    </aop:config>
+
+    <!--面向切面的编程2-->
+    <bean id="around" class="com.meituan.intercepter.MyInterceptor"></bean>
+    <aop:config>
+        <aop:pointcut expression="execution(public * com.meituan.service..*(..)))" id="pointcut"/>
+        <!-- 在切入点处插入增强处理、完成"织入" -->
+        <aop:advisor advice-ref="around" pointcut-ref="pointcut"/>
+    </aop:config>
+</beans>
+        <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+        <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer2">-->
+        <!--<property name="basePackage" value="com.meituan.model" />-->
+        <!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>-->
+        <!--</bean>-->
