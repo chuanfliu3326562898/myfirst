@@ -16,6 +16,9 @@ import com.meituan.model.User;
 import com.meituan.service.UserService;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by liujiangfeng on 2017/7/17.
@@ -32,15 +35,31 @@ public class UserServiceImpl implements UserService{
      */
     @SpringLogAround(interfaceDesc = "UserServiceImpl findNameById")
     public User findNameById(int id) {
-        System.out.println("test begin");
         TestUtil.print("ljf");
         //User user = mapper.findNameById(id);
        User user =new User();
        user.setName("12");
         return user;
     }
-//    public static  void main (String []args)
-//    {
+    public static  void main (String []args)
+    {
+//        List<String>mobileNumbers=new ArrayList<>();
+//        mobileNumbers.add("1");
+//        mobileNumbers.add("2");
+//        mobileNumbers.add("3");
+//        mobileNumbers.add("4");
+//        mobileNumbers.add("5");
+//
+//        List<Long>mobileNumbers
+//        List<Long> userIdListTmp = mobileNumbers.stream().map(mobileNumber -> {
+//           if(Long.parseLong(mobileNumber)%2==0){
+//
+//           }else{
+//               return Long.parseLong(mobileNumber);
+//           }
+//        });
 //        System.out.println("ok");
-//    }
+        Long tmp=2L;
+        System.out.println(String.valueOf(tmp));
+    }
 }
