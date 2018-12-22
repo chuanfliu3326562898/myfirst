@@ -15,7 +15,7 @@
     <!--<context:component-scan base-package="com.meituan"/>-->
     <mvc:annotation-driven/>
     <!--factorybean设置-->
-    <bean id="car" class="com.meituan.spring.life.factorybean.CarFactoryBean">
+    <bean id="car" class="com.jiangfengliu.spring.life.factorybean.CarFactoryBean">
         <property name="carInfo" value=" 法拉利,400,2000000"/>
     </bean>
 </beans>

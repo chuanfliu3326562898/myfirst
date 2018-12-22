@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
-<mapper  namespace="com.meituan.mapper.UserMapper">
+<mapper  namespace="com.jiangfengliu.mapper.UserMapper">
     <!--此处的id必须与mapper文件夹中的UserMapper借口中定义的方法一致，结果放在model里面的bean文件-->
-    <select id="findNameById" parameterType="int" resultType="com.meituan.model.User">
+    <select id="findNameById" parameterType="int" resultType="com.jiangfengliu.model.User">
         select name name from name where id=#{id}
     </select>
 </mapper>

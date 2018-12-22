@@ -15,9 +15,9 @@
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
     <typeAliases>
-        <typeAlias alias="User" type="com.meituan.model.User" />
+        <typeAlias alias="User" type="com.jiangfengliu.model.User" />
     </typeAliases>
     <typeHandlers>
-        <package name="com.meituan.mapper.UserMapper"/>
+        <package name="com.jiangfengliu.mapper.UserMapper"/>
     </typeHandlers>
 </configuration>
