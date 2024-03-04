@@ -9,8 +9,9 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class Configer {
-    @Bean(name="user",initMethod ="initMethod" )
-    public User getUser(){
-        return  new User();
+    @Bean(name = "user", initMethod = "initMethod")
+    public User getUser() {
+        return new User();
     }
 }
+
