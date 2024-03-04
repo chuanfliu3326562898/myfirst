@@ -22,6 +22,8 @@
             <!--</list>-->
         <!--</property>-->
     <!--</bean>-->
+    <bean class="com.jiangfengliu.config.PropertySourceLocatorProcessor"/>
+
     <!-- 用于将对象转换为 JSON  -->
     <bean id="stringConverter"
           class="org.springframework.http.converter.StringHttpMessageConverter">
