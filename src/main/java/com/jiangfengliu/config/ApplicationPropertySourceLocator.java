@@ -55,16 +55,16 @@ public class ApplicationPropertySourceLocator implements PropertySourceLocator {
      * @throws IOException
      */
     private void yamlPropertySource(List<PropertySource<?>> list, ClassLoader contextClassLoader) throws IOException {
-        InputStream in = contextClassLoader.getResourceAsStream("application.yml");
+        InputStream in = contextClassLoader.getResourceAsStream("conf/application.yml");
         if (Objects.nonNull(in)) {
             Map<String, Object> map = PropertySourceUtils.parseYaml(in);
-            list.add(new MapPropertySource("application.yml", map));
+            list.add(new MapPropertySource("conf/application.yml", map));
             in.close();
         }
-        in = contextClassLoader.getResourceAsStream("application.yaml");
+        in = contextClassLoader.getResourceAsStream("conf/application.yaml");
         if (Objects.nonNull(in)) {
             Map<String, Object> map = PropertySourceUtils.parseYaml(in);
-            list.add(new MapPropertySource("application.yaml", map));
+            list.add(new MapPropertySource("conf/application.yaml", map));
             in.close();
         }
     }
@@ -76,11 +76,11 @@ public class ApplicationPropertySourceLocator implements PropertySourceLocator {
      * @throws IOException
      */
     private void propertiesPropertySource(List<PropertySource<?>> list, ClassLoader contextClassLoader) throws IOException {
-        InputStream in = contextClassLoader.getResourceAsStream("application.properties");
+        InputStream in = contextClassLoader.getResourceAsStream("conf/application1.properties");
         if (Objects.nonNull(in)) {
             Properties properties = new Properties();
             properties.load(in);
-            list.add(new PropertiesPropertySource("application.properties", properties));
+            list.add(new PropertiesPropertySource("conf/application1.properties", properties));
             in.close();
         }
     }

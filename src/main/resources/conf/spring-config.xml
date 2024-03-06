@@ -49,4 +49,24 @@
     </bean>
 
     <import resource="spring-mybatis.xml"/>
+    
+    <bean id="clientProperty" class="com.jiangfengliu.config.MeteorClientProperty">
+        <property name="code" value="code"></property>
+        <property name="token" value="token"></property>
+        <property name="serverHost" value="127.0.0.1"></property>
+        <property name="servers">
+            <list>
+                <ref bean="server1"></ref>
+                <ref bean="server2"></ref>
+            </list>
+        </property>
+    </bean>
+    <bean id="server1" class="com.jiangfengliu.config.MeteorClientProperty.Server">
+        <property name="host" value="127.0.0.1"></property>
+        <property name="port" value="1207"></property>
+    </bean>
+    <bean id="server2" class="com.jiangfengliu.config.MeteorClientProperty.Server">
+        <property name="host" value="127.0.0.1"></property>
+        <property name="port" value="1207"></property>
+    </bean>
 </beans>

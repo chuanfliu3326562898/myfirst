@@ -50,8 +50,12 @@ public class PropertySourceLocatorProcessor implements EnvironmentAware, BeanFac
             propertySourcesPlaceholderConfigurer.setEnvironment(this.environment);
             propertySourcesPlaceholderConfigurer.setPropertySources(this.environment.getPropertySources());
             propertySourcesPlaceholderConfigurer.postProcessBeanFactory(beanFactory);
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+
 }
