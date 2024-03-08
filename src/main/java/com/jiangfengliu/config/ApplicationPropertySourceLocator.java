@@ -80,6 +80,7 @@ public class ApplicationPropertySourceLocator implements PropertySourceLocator {
         if (Objects.nonNull(in)) {
             Properties properties = new Properties();
             properties.load(in);
+            properties.setProperty("meteor.servers", properties.getProperty("meteor.servers"));
             list.add(new PropertiesPropertySource("conf/application1.properties", properties));
             in.close();
         }
