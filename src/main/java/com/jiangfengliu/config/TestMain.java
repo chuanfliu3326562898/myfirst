@@ -21,9 +21,9 @@ public class TestMain {
 //           new FileSystemXmlApplicationContext("D:\\IdeaProjects\\myfirst\\src\\main\\resources\\conf\\spring-config.xml");
 
 
-        ApplicationContext context2 = new ClassPathXmlApplicationContext(new String[] {"D:\\IdeaProjects\\myfirst\\src\\main\\resources\\conf\\spring-config.xml"});
+        ApplicationContext context2 = new ClassPathXmlApplicationContext(new String[]{"D:\\IdeaProjects\\myfirst\\src\\main\\resources\\conf\\spring-config.xml"});
 
-         //获取bean
+        //获取bean
         User tb = (User) context2.getBean("user");
         System.out.println(tb.getName());
     }

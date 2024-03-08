@@ -62,11 +62,12 @@
         </property>
     </bean>
     <bean id="server1" class="com.jiangfengliu.config.MeteorClientProperty.Server">
-        <property name="host" value="127.0.0.1"></property>
+        <property name="host" value="10.0.0.1"></property>
         <property name="port" value="1207"></property>
     </bean>
     <bean id="server2" class="com.jiangfengliu.config.MeteorClientProperty.Server">
-        <property name="host" value="127.0.0.1"></property>
+        <property name="host" value="10.0.0.2"></property>
         <property name="port" value="1207"></property>
     </bean>
 </beans>
+
