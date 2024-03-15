@@ -25,9 +25,9 @@
 >
 
   <!-- Activate Cocoon Spring Configurator -->
-  <configurator:settings/>
+<!--  <configurator:settings/>-->
 
-  <!-- Activate Avalon Bridge -->
-  <avalon:bridge/>
+<!--  &lt;!&ndash; Activate Avalon Bridge &ndash;&gt;-->
+<!--  <avalon:bridge/>-->
 
 </beans>
